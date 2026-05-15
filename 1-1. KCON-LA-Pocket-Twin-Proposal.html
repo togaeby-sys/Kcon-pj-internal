@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<title>KCON LA 2026 × 포켓트윈 — 영문판 런칭 부스터 협업 검토(안)</title>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBFAF7;
+    --paper-2:#F5F2EC;
+    --ink:#2A2620;
+    --ink-soft:#4A4239;
+    --ink-faint:#8A8275;
+    --coral:#D87F6E;
+    --coral-soft:#F2DDD6;
+    --coral-deep:#B86250;
+    --line:#E5DFD3;
+    --line-soft:#EDE8DC;
+    --kcon-red:#E63946;
+    --kcon-red-soft:#FAD7DA;
+    --kcon-navy:#1D3557;
+    --kcon-navy-soft:#D7DEE9;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{background:var(--paper);color:var(--ink);font-family:'Pretendard',sans-serif;font-feature-settings:'ss01','ss02';font-weight:400;line-height:1.7;}
+
+  .doc{display:grid;grid-template-columns:240px 1fr;max-width:1340px;margin:0 auto;}
+
+  /* Sidebar TOC */
+  .toc{position:sticky;top:0;height:100vh;overflow-y:auto;border-right:1px solid var(--line);padding:42px 28px;background:var(--paper);}
+  .toc .brand-mark{font-size:.62rem;letter-spacing:.32em;color:var(--coral);font-weight:600;text-transform:uppercase;margin-bottom:6px;}
+  .toc .brand-title{font-size:1.02rem;letter-spacing:-.01em;font-weight:600;line-height:1.4;color:var(--ink);margin-bottom:32px;}
+  .toc .brand-title em{font-style:normal;color:var(--coral);font-weight:500;}
+  .toc ol{list-style:none;margin:0;padding:0;}
+  .toc ol li{margin-bottom:2px;}
+  .toc ol li a{display:flex;align-items:baseline;gap:10px;padding:8px 6px;font-size:.74rem;color:var(--ink-soft);text-decoration:none;border-radius:3px;transition:all .15s ease;font-weight:400;}
+  .toc ol li a:hover{background:var(--paper-2);color:var(--ink);}
+  .toc ol li a.active{background:var(--coral-soft);color:var(--coral-deep);font-weight:500;}
+  .toc ol li a .num{color:var(--coral);font-weight:600;font-size:.62rem;letter-spacing:.15em;flex-shrink:0;min-width:22px;}
+  .toc .meta{margin-top:36px;padding-top:28px;border-top:1px solid var(--line);font-size:.66rem;color:var(--ink-faint);line-height:1.7;font-weight:400;}
+  .toc .meta .label{font-size:.55rem;letter-spacing:.22em;color:var(--coral);font-weight:600;text-transform:uppercase;margin-bottom:4px;}
+  .toc .urgent{margin-top:18px;padding:14px;background:var(--kcon-red-soft);border-radius:4px;border-left:3px solid var(--kcon-red);}
+  .toc .urgent .lab{font-size:.55rem;letter-spacing:.22em;color:var(--kcon-red);font-weight:700;text-transform:uppercase;margin-bottom:4px;}
+  .toc .urgent .val{font-size:.74rem;color:var(--ink);font-weight:600;line-height:1.5;}
+
+  /* Main */
+  .main{padding:0 56px 64px;max-width:880px;margin:0 auto;}
+
+  /* Cover */
+  .cover{margin:0 -56px 8px;padding:72px 56px 60px;background:linear-gradient(135deg, var(--paper-2) 0%, var(--coral-soft) 50%, var(--kcon-red-soft) 100%);border-bottom:1px solid var(--line);}
+  .cover-pre{font-size:.62rem;letter-spacing:.32em;color:var(--kcon-red);font-weight:600;text-transform:uppercase;margin-bottom:14px;}
+  .cover-title{font-weight:200;font-size:clamp(2rem,3.6vw,2.8rem);letter-spacing:-0.03em;line-height:1.18;color:var(--ink);margin-bottom:24px;}
+  .cover-title .accent{color:var(--kcon-red);font-weight:300;}
+  .cover-title .x{color:var(--coral);font-weight:200;margin:0 .15em;}
+  .cover-subtitle{font-size:.96rem;color:var(--ink-soft);line-height:1.65;max-width:580px;margin-bottom:14px;font-weight:400;}
+  .cover-tag{font-size:.92rem;color:var(--coral-deep);font-style:italic;font-weight:500;margin-bottom:32px;}
+  .cover-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:18px;}
+  .meta-item .lab{font-size:.55rem;letter-spacing:.28em;color:var(--coral-deep);font-weight:600;text-transform:uppercase;margin-bottom:6px;}
+  .meta-item .val{font-size:.86rem;color:var(--ink);font-weight:500;line-height:1.5;}
+
+  /* Section structure */
+  section{padding:54px 0 8px;border-bottom:1px solid var(--line-soft);}
+  section:last-child{border-bottom:none;}
+  .section-num{display:flex;align-items:center;gap:14px;margin-bottom:14px;}
+  .section-num .line{width:32px;height:1px;background:var(--coral);}
+  .section-num span{font-size:.6rem;letter-spacing:.32em;color:var(--coral);font-weight:600;text-transform:uppercase;}
+  .section-title{font-weight:200;font-size:clamp(1.5rem,2.4vw,1.95rem);letter-spacing:-0.02em;line-height:1.25;color:var(--ink);margin-bottom:28px;}
+  .section-title strong{font-weight:400;color:var(--coral-deep);}
+
+  h2{font-weight:500;font-size:1.08rem;color:var(--ink);margin:30px 0 12px;letter-spacing:-0.018em;display:flex;align-items:baseline;gap:14px;}
+  h2 .nb{font-weight:600;font-size:.66rem;letter-spacing:.22em;color:var(--coral);text-transform:uppercase;flex-shrink:0;}
+  h3{font-weight:500;font-size:.95rem;color:var(--ink);margin:22px 0 10px;letter-spacing:-0.01em;}
+
+  p{margin-bottom:14px;color:var(--ink-soft);font-weight:400;font-size:.92rem;line-height:1.75;}
+  p b{color:var(--ink);font-weight:600;}
+  p em{font-style:normal;color:var(--coral-deep);font-weight:500;}
+  ul,ol{margin:10px 0 14px 22px;color:var(--ink-soft);}
+  ul li,ol li{margin-bottom:6px;font-size:.9rem;line-height:1.7;}
+
+  blockquote{margin:24px 0;padding:18px 24px;border-left:2px solid var(--coral);background:var(--paper-2);font-style:italic;font-weight:400;color:var(--ink);font-size:.98rem;line-height:1.65;border-radius:0 3px 3px 0;}
+
+  /* Fact cards */
+  .fact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:22px 0;}
+  .fact-card{padding:22px 24px;background:#fff;border:1px solid var(--line);border-radius:3px;}
+  .fact-card .lab{font-size:.55rem;letter-spacing:.3em;color:var(--coral);font-weight:600;text-transform:uppercase;margin-bottom:10px;}
+  .fact-card .stat{font-weight:200;font-size:1.9rem;color:var(--ink);letter-spacing:-0.03em;line-height:1;margin-bottom:8px;}
+  .fact-card .stat.coral{color:var(--coral);}
+  .fact-card .stat.kcon{color:var(--kcon-red);}
+  .fact-card p{font-size:.78rem;line-height:1.55;color:var(--ink-soft);font-weight:300;margin-top:8px;margin-bottom:0;}
+
+  /* Timeline / Urgency block */
+  .urgency-box{
+    margin:22px 0;padding:28px 32px;
+    background:linear-gradient(135deg, #1D1517 0%, #2A1A1F 50%, #3A1A2A 100%);
+    color:#fff;border-radius:6px;position:relative;overflow:hidden;
+  }
+  .urgency-box::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg, transparent 0%, var(--kcon-red) 30%, var(--coral) 60%, transparent 100%);}
+  .urgency-box .lab{font-size:.55rem;letter-spacing:.32em;color:var(--kcon-red);font-weight:700;text-transform:uppercase;margin-bottom:14px;}
+  .urgency-box .big{font-weight:200;font-size:clamp(1.4rem,2.6vw,1.85rem);line-height:1.4;color:#fff;letter-spacing:-0.01em;margin-bottom:10px;}
+  .urgency-box .big .accent{color:var(--kcon-red);font-weight:400;}
+  .urgency-box .sub{font-size:.85rem;color:rgba(255,255,255,.75);font-weight:400;line-height:1.65;}
+
+  /* Timeline visual */
+  .timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:22px 0;}
+  .tl-cell{padding:16px 14px;background:#fff;border:1px solid var(--line);position:relative;}
+  .tl-cell:not(:last-child){border-right:none;}
+  .tl-cell .date{font-size:.62rem;letter-spacing:.18em;color:var(--coral);font-weight:600;text-transform:uppercase;margin-bottom:6px;}
+  .tl-cell h5{font-weight:600;font-size:.84rem;color:var(--ink);margin-bottom:4px;letter-spacing:-0.01em;}
+  .tl-cell p{font-size:.76rem;color:var(--ink-soft);margin:0;line-height:1.5;font-weight:400;}
+  .tl-cell.peak{background:var(--coral-soft);}
+  .tl-cell.peak .date{color:var(--coral-deep);}
+
+  /* Option comparison table */
+  .options-table{width:100%;border-collapse:collapse;margin:22px 0;font-size:.85rem;}
+  .options-table th{padding:12px 12px;background:var(--paper-2);font-weight:600;font-size:.66rem;letter-spacing:.16em;color:var(--coral);text-transform:uppercase;text-align:left;border-bottom:1.5px solid var(--coral);}
+  .options-table th.recommend{background:var(--coral-soft);color:var(--coral-deep);}
+  .options-table td{padding:12px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink-soft);font-weight:400;line-height:1.6;}
+  .options-table td:first-child{font-weight:600;color:var(--ink);width:24%;background:var(--paper-2);}
+  .options-table td.b-col{background:#FDF8F5;}
+  .options-table .pick-badge{display:inline-block;padding:2px 8px;border-radius:3px;background:var(--coral);color:#fff;font-size:.6rem;letter-spacing:.12em;font-weight:700;text-transform:uppercase;margin-left:6px;}
+
+  /* Detail box for option B */
+  .detail-box{margin:22px 0;padding:28px 30px;background:#fff;border:1px solid var(--line);border-radius:4px;border-top:4px solid var(--coral);}
+  .detail-box h4{font-weight:600;font-size:1.02rem;color:var(--ink);margin-bottom:14px;letter-spacing:-0.01em;}
+  .detail-box .pick-tag{display:inline-block;padding:3px 10px;border-radius:3px;background:var(--coral);color:#fff;font-size:.6rem;letter-spacing:.16em;font-weight:700;text-transform:uppercase;margin-bottom:10px;}
+
+  /* Feature grid */
+  .feature-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:18px 0;}
+  .feature{padding:18px 20px;background:var(--paper-2);border-radius:3px;border-left:3px solid var(--coral);}
+  .feature .lab{font-size:.55rem;letter-spacing:.28em;color:var(--coral);font-weight:600;text-transform:uppercase;margin-bottom:8px;}
+  .feature h5{font-weight:600;font-size:.92rem;color:var(--ink);margin-bottom:6px;letter-spacing:-0.01em;}
+  .feature p{font-size:.8rem;line-height:1.6;color:var(--ink-soft);margin:0;font-weight:400;}
+
+  /* KPI cards */
+  .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0;}
+  .kpi{padding:16px 14px;background:#fff;border:1px solid var(--line);border-radius:3px;text-align:center;}
+  .kpi .lab{font-size:.55rem;letter-spacing:.22em;color:var(--coral);font-weight:600;text-transform:uppercase;margin-bottom:8px;line-height:1.3;}
+  .kpi .target{font-weight:300;font-size:1.1rem;color:var(--ink);letter-spacing:-0.02em;line-height:1.1;margin-bottom:4px;}
+  .kpi .sub{font-size:.7rem;color:var(--ink-faint);font-weight:400;}
+
+  /* Context bridge */
+  .bridge-box{margin:22px 0;padding:26px 30px;background:linear-gradient(135deg, var(--paper-2) 0%, var(--coral-soft) 50%, var(--kcon-navy-soft) 100%);border-radius:4px;border:1px solid var(--line);}
+  .bridge-box .lab{font-size:.6rem;letter-spacing:.3em;color:var(--coral-deep);font-weight:600;text-transform:uppercase;margin-bottom:10px;}
+  .bridge-box p{font-size:.92rem;line-height:1.65;color:var(--ink);font-weight:400;margin:0;}
+  .bridge-box p b{color:var(--coral-deep);}
+
+  /* Sequence chain */
+  .chain{display:flex;align-items:stretch;gap:0;margin:22px 0;flex-wrap:nowrap;}
+  .chain-step{flex:1;padding:18px 14px;background:#fff;border:1px solid var(--line);position:relative;border-radius:3px;}
+  .chain-step:not(:last-child){margin-right:24px;}
+  .chain-step:not(:last-child)::after{
+    content:"→";position:absolute;right:-18px;top:50%;transform:translateY(-50%);
+    color:var(--coral);font-weight:600;font-size:1.2rem;
+  }
+  .chain-step .lab{font-size:.55rem;letter-spacing:.22em;color:var(--coral);font-weight:600;text-transform:uppercase;margin-bottom:6px;}
+  .chain-step h5{font-weight:600;font-size:.88rem;color:var(--ink);margin-bottom:4px;letter-spacing:-0.01em;}
+  .chain-step p{font-size:.74rem;color:var(--ink-soft);margin:0;line-height:1.5;}
+
+  /* Closing */
+  .closing-box{margin:30px 0;padding:32px 38px;background:linear-gradient(135deg, var(--paper-2) 0%, var(--coral-soft) 100%);border-radius:4px;border:1px solid var(--line);text-align:center;}
+  .closing-box blockquote{margin:0;background:transparent;border:none;padding:0;font-size:1rem;line-height:1.75;}
+  .closing-box blockquote b{color:var(--coral-deep);font-weight:600;}
+
+  .doc-footer{margin-top:64px;padding:28px 0;border-top:1px solid var(--line);text-align:center;}
+  .doc-footer p{font-size:.76rem;color:var(--ink-faint);margin-bottom:4px;font-weight:400;}
+  .doc-footer .note{margin-top:12px;font-size:.68rem;color:var(--ink-faint);font-style:italic;font-weight:300;}
+
+  @media (max-width: 900px){
+    .doc{grid-template-columns:1fr;}
+    .toc{position:relative;height:auto;border-right:none;border-bottom:1px solid var(--line);padding:24px;}
+    .toc ol{display:grid;grid-template-columns:repeat(2,1fr);gap:4px;}
+    .main{padding:0 28px 48px;}
+    .cover{margin:0 -28px 8px;padding:48px 28px;}
+    .cover-meta{grid-template-columns:1fr;}
+    .fact-grid,.feature-grid,.timeline,.kpi-grid{grid-template-columns:1fr;}
+    .chain{flex-direction:column;gap:24px;}
+    .chain-step:not(:last-child){margin-right:0;margin-bottom:0;}
+    .chain-step:not(:last-child)::after{right:50%;top:auto;bottom:-22px;transform:translateX(50%) rotate(90deg);}
+  }
+  @media print{.toc{display:none;}.doc{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<div class="doc">
+
+<aside class="toc">
+  <div>
+    <div class="brand-mark">English Launch Booster</div>
+    <div class="brand-title">KCON LA 2026<br/><em>× 포켓트윈 단기 협업</em></div>
+    <ol>
+      <li><a href="#context"><span class="num">01</span><span>검토 배경</span></a></li>
+      <li><a href="#kcon"><span class="num">02</span><span>KCON LA 이해</span></a></li>
+      <li><a href="#timing"><span class="num">03</span><span>시간 제약</span></a></li>
+      <li><a href="#options"><span class="num">04</span><span>3가지 협업 옵션</span></a></li>
+      <li><a href="#recommend"><span class="num">05</span><span>진행(안) 상세</span></a></li>
+      <li><a href="#strategy"><span class="num">06</span><span>전체 전략 맥락</span></a></li>
+      <li><a href="#conclusion"><span class="num">07</span><span>결론</span></a></li>
+    </ol>
+  </div>
+  <div class="meta">
+    <div class="label">문서 종류</div>
+    단기 협업 검토(안)<br/><br/>
+    <div class="label">버전</div>
+    v1.0 · 2026년 5월<br/><br/>
+    <div class="label">프로젝트 코드</div>
+    KLA-BOOSTER<br/><br/>
+    <div class="label">작성</div>
+    포켓트윈 마케팅팀
+  </div>
+  <div class="urgent">
+    <div class="lab">D-Day</div>
+    <div class="val">~12주<br/>(8월 초 KCON 기준)</div>
+  </div>
+</aside>
+
+<main class="main">
+
+<!-- Cover -->
+<section class="cover">
+  <div class="cover-pre">KCON LA · English Launch Booster Plan</div>
+  <h1 class="cover-title">KCON LA 2026<br/><span class="accent">× 포켓트윈</span> 단기 협업</h1>
+  <p class="cover-subtitle">2026년 8월 LA에서 개최되는 CJ ENM 주관 KCON LA를 활용하여, 7월 중순 영문판 런칭 직후의 북미 시장 입성 모먼트로 KCON을 활용한다. 중규모 협업(공식 파트너 + 워치파티 + 한정 아이템) 형태로 5주 내 실행 가능한 마케팅 부스터 캠페인.</p>
+  <p class="cover-tag">"영문판 7월 런칭 → KCON 8월 점화 → MAMA 11월 폭발."</p>
+
+  <div class="cover-meta">
+    <div class="meta-item"><div class="lab">대상 이벤트</div><div class="val">KCON LA 2026<br/>(8월 초 · LA)</div></div>
+    <div class="meta-item"><div class="lab">1순위 목적</div><div class="val">영문판 북미 런칭 부스터<br/>(마케팅 중심)</div></div>
+    <div class="meta-item"><div class="lab">협업 규모</div><div class="val">중규모<br/>(공식 파트너 + 워치파티 + 한정 아이템)</div></div>
+  </div>
+</section>
+
+<!-- 01 Context -->
+<section id="context">
+  <div class="section-num"><span class="line"></span><span>Section 01</span></div>
+  <h1 class="section-title">검토 <strong>배경</strong></h1>
+
+  <h2><span class="nb">1.1</span>왜 KCON 협업인가</h2>
+  <p>포켓트윈 영문판은 <b>2026년 7월 중순 북미 런칭</b> 예정이며, 런칭 직후 약 3-4주의 critical window 안에 <em>북미 시장 입성 모먼트</em>를 만들어야 합니다. KCON LA는 8월 초 LA에서 개최되는 CJ ENM 주관 북미 최대 K-pop 페스티벌로, <b>영문판 런칭과의 timing이 거의 완벽하게 정합</b>합니다.</p>
+
+  <div class="urgency-box">
+    <div class="lab">Strategic Window</div>
+    <div class="big">영문판 7월 런칭의 <span class="accent">"첫 30일"</span>이<br/>북미 시장 정착의 <span class="accent">분기점</span>입니다.</div>
+    <div class="sub">KCON LA는 이 critical window를 정확히 관통하는 단 하나의 K-pop 메가 이벤트. 마케팅 모먼트로 활용하지 않을 이유가 없습니다.</div>
+  </div>
+
+  <h2><span class="nb">1.2</span>핵심 명제</h2>
+  <ul>
+    <li><b>1순위 목적</b> · 영문판 북미 런칭 부스터 (다운로드·활성화·잔존 KPI 견인)</li>
+    <li><b>2순위 효과</b> · MAMA 본 협업 전 CJ ENM과의 협업 관계 사전 구축</li>
+    <li><b>3순위 효과</b> · 4시장 동시 운영 검증 (KCON 시즌에 4서버 부하·운영 SOP 점검)</li>
+  </ul>
+</section>
+
+<!-- 02 KCON Understanding -->
+<section id="kcon">
+  <div class="section-num"><span class="line"></span><span>Section 02</span></div>
+  <h1 class="section-title">KCON LA <strong>이해</strong></h1>
+
+  <h2><span class="nb">2.1</span>KCON이란?</h2>
+  <p><b>KCON</b>은 CJ ENM이 주관하는 세계 최대 K-pop·K-컬처 페스티벌로, 2012년 LA에서 처음 시작되어 현재 전 세계 주요 도시에서 매년 개최됩니다. <em>"컨벤션(콘텐츠·라이프스타일)" + "콘서트(아티스트 라이브)"</em>가 결합된 하이브리드 포맷이 핵심.</p>
+
+  <div class="fact-grid">
+    <div class="fact-card">
+      <div class="lab">KCON LA 누적</div>
+      <div class="stat coral">80K+</div>
+      <h4>3일 현장 관객</h4>
+      <p>크립토닷컴 아레나 + 피콕 시어터 동시 운영 · 매년 매진</p>
+    </div>
+    <div class="fact-card">
+      <div class="lab">글로벌 송출</div>
+      <div class="stat kcon">20+</div>
+      <h4>참여 아티스트</h4>
+      <p>K-pop 대표 그룹·솔로 아티스트 매일 라인업 · M COUNTDOWN 무대 포함</p>
+    </div>
+    <div class="fact-card">
+      <div class="lab">디지털 도달</div>
+      <div class="stat">5M+</div>
+      <h4>온라인 시청자</h4>
+      <p>Mnet·TVING·각 플랫폼 동시 송출 · SNS 임팩트 별도</p>
+    </div>
+  </div>
+
+  <h2><span class="nb">2.2</span>KCON 시청자 — 영문판 코어 타깃과 정합</h2>
+  <ul>
+    <li><b>지역</b> · 미국·캐나다 중심 (LA·인근 주 + 전국 원격 시청자)</li>
+    <li><b>연령</b> · 10·20대 70%+ 중심 — 포켓트윈 영문판 타깃과 직접 일치</li>
+    <li><b>성별</b> · 여성 80%+ — 포켓트윈 코어(90% 여성) 데모와 거의 정합</li>
+    <li><b>행동 특성</b> · K-pop 팬덤 활성 · 모바일 콘텐츠 소비 高 · 디지털 굿즈·아이템 수용도 높음</li>
+  </ul>
+  <blockquote><b>핵심</b>: KCON 시청자 = 포켓트윈 영문판이 정확히 노려야 할 사용자 풀. <em>별도 사용자 획득 캠페인을 하는 대신, KCON 시청자에게 직접 노출하는 것이 가장 효율적</em>.</blockquote>
+</section>
+
+<!-- 03 Timing -->
+<section id="timing">
+  <div class="section-num"><span class="line"></span><span>Section 03</span></div>
+  <h1 class="section-title">시간 <strong>제약</strong></h1>
+
+  <h2><span class="nb">3.1</span>D-12주, 솔직한 평가</h2>
+  <p>오늘(2026년 5월 중순) 기준 KCON LA(8월 초)까지 약 <b>12주</b>. 라이선스 협상·dev·마케팅 전 영역을 빠듯하게 가져가야 합니다.</p>
+
+  <div class="timeline">
+    <div class="tl-cell">
+      <div class="date">D-12 ~ D-8</div>
+      <h5>5월 중순 ~ 6월 중순</h5>
+      <p>CJ ENM 협상 · 라이선스 합의 · 협업 범위 확정</p>
+    </div>
+    <div class="tl-cell">
+      <div class="date">D-8 ~ D-4</div>
+      <h5>6월 중순 ~ 7월 중순</h5>
+      <p>Dev: 한정 아이템·룸 테마 제작 · 워치파티 기능 검증</p>
+    </div>
+    <div class="tl-cell peak">
+      <div class="date">D-4 ~ D-Day</div>
+      <h5>7월 중순 ~ 8월 초</h5>
+      <p>영문판 런칭 + KCON 사전 마케팅 동시 · 사전 등록 캠페인</p>
+    </div>
+    <div class="tl-cell">
+      <div class="date">D-Day + 4주</div>
+      <h5>8월 초 ~ 9월 초</h5>
+      <p>KCON 3일 운영 · 잔존 콘텐츠 · MAMA 사전 홍보 전환</p>
+    </div>
+  </div>
+
+  <h2><span class="nb">3.2</span>현실적 제약</h2>
+  <ul>
+    <li><b>라이선스 협상 기간</b> · 통상 6-8주 → 5월 즉시 시작 필수</li>
+    <li><b>Dev 리소스</b> · 다른 영문판 런칭 작업과 병행 → 협업 범위는 <em>"기존 기능 + α"</em>로 한정</li>
+    <li><b>마케팅 lead time</b> · 사전 등록 캠페인 효과를 보려면 D-4주 이전 시작 필수</li>
+  </ul>
+  <p><em>결론</em>: 가능하지만 <b>모든 단계가 정시 출발</b>해야 합니다. 의사결정 지연 1주 = KCON 협업 무산 리스크.</p>
+</section>
+
+<!-- 04 Options -->
+<section id="options">
+  <div class="section-num"><span class="line"></span><span>Section 04</span></div>
+  <h1 class="section-title">3가지 협업 <strong>옵션</strong></h1>
+
+  <table class="options-table">
+    <thead>
+      <tr>
+        <th>차원</th>
+        <th>Option A — 라이트</th>
+        <th class="recommend">Option B — 중규모 <span class="pick-badge">진행</span></th>
+        <th>Option C — 헤비</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>라이선스 범위</td>
+        <td>로고 사용권<br/>SNS 공식 멘션</td>
+        <td class="b-col">"KCON LA 공식 디지털 파트너"<br/>워치파티 + 한정 아이템 + 룸 테마</td>
+        <td>풀 미러링 (디지털 부스·미트앤그릿·시상까지)</td>
+      </tr>
+      <tr>
+        <td>기간</td>
+        <td>KCON 3일 + 사전 1주</td>
+        <td class="b-col">사전 4주 + KCON 3일 + 사후 2주 (총 7주)</td>
+        <td>사전 8주 + KCON 3일 + 사후 4주</td>
+      </tr>
+      <tr>
+        <td>Dev 부담</td>
+        <td>매우 낮음 (1-2주)</td>
+        <td class="b-col">중 (8주, 병행)</td>
+        <td>높음 (12주+, 영문판 런칭과 충돌)</td>
+      </tr>
+      <tr>
+        <td>마케팅 임팩트</td>
+        <td>낮음 (브랜드 인지 정도)</td>
+        <td class="b-col">高 (다운로드·활성화·잔존)</td>
+        <td>매우 高 (단, 실행 시)</td>
+      </tr>
+      <tr>
+        <td>예상 라이선스 비용</td>
+        <td>낮음</td>
+        <td class="b-col">중</td>
+        <td>높음</td>
+      </tr>
+      <tr>
+        <td>리스크</td>
+        <td>존재감 부족</td>
+        <td class="b-col">스케줄 빠듯 (관리 가능)</td>
+        <td>12주 내 실행 불가 가능성 高</td>
+      </tr>
+      <tr>
+        <td>영문판 런칭 부스터 효과</td>
+        <td>★☆☆</td>
+        <td class="b-col">★★★ (목표 정합)</td>
+        <td>★★★★ (실행 시) / ★ (미실행 시 0)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <blockquote><b>진행(안) 근거</b>: Option A는 1순위 목적(영문판 런칭 부스터)을 충족하지 못하고, Option C는 <em>"이상적이지만 12주 내 실행 불가능 확률 高"</em>. <b>Option B가 목적 정합 + 실행 가능성의 최적 균형점</b>.</blockquote>
+</section>
+
+<!-- 05 Recommendation -->
+<section id="recommend">
+  <div class="section-num"><span class="line"></span><span>Section 05</span></div>
+  <h1 class="section-title">진행(안) — <strong>Option B 상세</strong></h1>
+
+  <div class="detail-box">
+    <span class="pick-tag">★ Recommended</span>
+    <h4>"KCON LA 공식 디지털 파트너" — 중규모 협업</h4>
+    <p>포켓트윈은 KCON LA 2026의 <b>공식 디지털 파트너</b>로 참여하여, 영문판 사용자가 KCON 시즌을 포켓트윈 안에서 함께 즐기는 디지털 동반 경험을 제공합니다. CJ ENM과는 <em>명칭·로고 라이선스 + 콘서트 워치파티 송출권 + KCON 공식 한정 아이템 제작권</em>을 합의합니다.</p>
+
+    <h3>핵심 콘텐츠 4가지</h3>
+    <div class="feature-grid">
+      <div class="feature">
+        <div class="lab">콘텐츠 ①</div>
+        <h5>KCON LA 공식 워치파티 룸</h5>
+        <p>3일간 매 콘서트 나이트를 포켓트윈 룸에서 친구와 함께 시청. 사용자 자율 그룹핑(룸·해시태그)으로 같은 최애 팬끼리 자연스럽게 모입니다. 시상식 푸시 동기화·8명 동시 관람.</p>
+      </div>
+      <div class="feature">
+        <div class="lab">콘텐츠 ②</div>
+        <h5>KCON 공식 한정 아이템</h5>
+        <p>KCON LA 공식 로고·심볼 활용 의상·룸 테마·소품. 3일 한정 배포 · 시즌 후에도 소장 가능. 영문판 사용자의 첫 결제 유도 핵심 아이템.</p>
+      </div>
+      <div class="feature">
+        <div class="lab">콘텐츠 ③</div>
+        <h5>"LA 다운타운" 룸 테마</h5>
+        <p>크립토닷컴 아레나 인근 LA 다운타운 분위기의 룸 테마. KCON 분위기를 영구 자산으로 보유. 영문판 사용자에게 "LA에서 친구들 만나는 느낌" 경험.</p>
+      </div>
+      <div class="feature">
+        <div class="lab">콘텐츠 ④</div>
+        <h5>3일 일일 챌린지</h5>
+        <p>Day 1: 의상 챌린지 · Day 2: 룸 데코 챌린지 · Day 3: 단체 셀카 챌린지. 챌린지 참여 시 한정 트로피·뱃지 보상. 활성화·체류시간 견인.</p>
+      </div>
+    </div>
+
+    <h3>핵심 KPI (영문판 런칭 부스터 중심)</h3>
+    <div class="kpi-grid">
+      <div class="kpi">
+        <div class="lab">영문판 다운로드</div>
+        <div class="target">+50%</div>
+        <div class="sub">KCON 시즌 기여분</div>
+      </div>
+      <div class="kpi">
+        <div class="lab">D7 활성화</div>
+        <div class="target">35%+</div>
+        <div class="sub">신규 영문 사용자</div>
+      </div>
+      <div class="kpi">
+        <div class="lab">워치파티 참여</div>
+        <div class="target">15K+</div>
+        <div class="sub">3일 누적 룸 입장</div>
+      </div>
+      <div class="kpi">
+        <div class="lab">한정 아이템 ARPU</div>
+        <div class="target">$8~12</div>
+        <div class="sub">영문 신규 1인당</div>
+      </div>
+    </div>
+
+    <h3>예상 리소스 (대략)</h3>
+    <ul>
+      <li><b>라이선스 비용</b> · CJ ENM과 협상 (중규모 협업 통상 범위)</li>
+      <li><b>Dev 공수</b> · 약 8주 (영문판 런칭팀 일부 + KCON 협업 전용 인력)</li>
+      <li><b>마케팅 예산</b> · 영문판 런칭 예산 통합 운영 (별도 증액 없음 가능)</li>
+      <li><b>운영 인력</b> · KCON 3일간 24h 모니터링 (4시장 동시 대응 미니 SOC)</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 06 Strategy Context -->
+<section id="strategy">
+  <div class="section-num"><span class="line"></span><span>Section 06</span></div>
+  <h1 class="section-title">전체 전략 <strong>맥락</strong></h1>
+
+  <p>KCON 협업은 단독 캠페인이 아닌, <b>2026년 하반기 전체 모먼트 체인의 첫 점화</b>입니다.</p>
+
+  <div class="chain">
+    <div class="chain-step">
+      <div class="lab">7월 중순</div>
+      <h5>영문판 북미 런칭</h5>
+      <p>북미 사용자 풀 형성 시작 · 사전 등록</p>
+    </div>
+    <div class="chain-step">
+      <div class="lab">8월 초</div>
+      <h5>KCON LA 점화</h5>
+      <p>북미 사용자 활성화·잔존 · CJ ENM 파트너십 사전 구축</p>
+    </div>
+    <div class="chain-step">
+      <div class="lab">11월 말</div>
+      <h5>MAMA Awards 폭발</h5>
+      <p>4시장 동시 워치파티 · 글로벌 통합 모먼트</p>
+    </div>
+  </div>
+
+  <div class="bridge-box">
+    <div class="lab">Strategic Synergy</div>
+    <p>KCON 협업으로 <b>CJ ENM과의 운영 협업 관계가 사전 구축</b>되면, 11월 MAMA 협상력·실행 효율이 크게 향상됩니다. <b>KCON 시즌의 4시장 운영 검증 데이터</b>는 그대로 MAMA 운영 SOP의 기반이 됩니다. 즉, KCON은 영문판 부스터인 동시에 <em>MAMA 본 협업의 사전 시뮬레이션</em> 역할도 자연스럽게 수행합니다.</p>
+  </div>
+
+  <h2><span class="nb">6.1</span>3개 캠페인의 상호 강화</h2>
+  <table class="options-table">
+    <thead><tr><th>캠페인</th><th>1순위 목적</th><th>다음 캠페인에 주는 자산</th></tr></thead>
+    <tbody>
+      <tr><td>영문판 런칭 (7월)</td><td>북미 사용자 풀 형성</td><td>KCON에 노출할 사용자 베이스</td></tr>
+      <tr><td>KCON LA (8월)</td><td>영문판 활성화·잔존</td><td>CJ ENM 신뢰 + 4시장 운영 검증 데이터</td></tr>
+      <tr><td>MAMA (11월)</td><td>4시장 통합 점화</td><td>2027 PMA 베타 출범 토대</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 07 Conclusion -->
+<section id="conclusion">
+  <div class="section-num"><span class="line"></span><span>Section 07</span></div>
+  <h1 class="section-title">결론</h1>
+
+  <h2><span class="nb">7.1</span>한 줄 요약</h2>
+  <div class="closing-box">
+    <blockquote>"영문판 7월 런칭의 첫 4주는 북미 시장 정착의 분기점이며,<br/><b>KCON LA 2026은 그 분기점을 관통하는 단 하나의 K-pop 메가 이벤트</b>다.<br/><br/>중규모 협업(공식 파트너 + 워치파티 + 한정 아이템)으로<br/><b>영문판 런칭 부스터 + MAMA 사전 협업 구축 + 4시장 운영 검증</b>을 동시에 달성한다."</blockquote>
+  </div>
+
+  <h2><span class="nb">7.2</span>리스크 vs 기회</h2>
+  <ul>
+    <li><b>최대 리스크</b> · 의사결정 지연 1-2주 시 12주 일정 무산 → <em>즉시 GO/NO-GO 결정 필요</em></li>
+    <li><b>최대 기회</b> · 영문판 런칭 효율 +50% 견인 가능 + MAMA 협업 협상력 사전 확보 + PMA 비전의 첫 학습 모먼트</li>
+  </ul>
+
+  <div class="doc-footer">
+    <p><b>문서 종류</b> · 단기 협업 검토(안) — KCON LA 2026</p>
+    <p><b>작성</b> · 포켓트윈 마케팅팀 · 2026년 5월</p>
+    <p class="note">본 검토(안)은 영문판 북미 런칭 부스터를 1순위 목적으로 하며, 2026 MAMA 협업 기획(안) 및 Pocket Music Awards 비전 기획(안)과 연결된 전체 전략 체인의 일부입니다.</p>
+  </div>
+</section>
+
+</main>
+</div>
+
+<script>
+const links = document.querySelectorAll('.toc ol li a');
+const sections = document.querySelectorAll('section[id]');
+function updateActive(){
+  const scrollPos = window.scrollY + 100;
+  let current = null;
+  sections.forEach(sec => { if(sec.offsetTop <= scrollPos) current = sec.id; });
+  links.forEach(link => { link.classList.toggle('active', link.getAttribute('href') === '#' + current); });
+}
+window.addEventListener('scroll', updateActive);
+updateActive();
+</script>
+
+</body>
+</html>
